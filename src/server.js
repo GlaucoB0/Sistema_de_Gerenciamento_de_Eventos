@@ -19,6 +19,9 @@ app.use(cors());
 
 // Criação das Tabelas
 import "./models/palestrantesModel.js"
+import "./models/participantesModel.js"
+import "./models/eventosModel.js"
+
 
 // Utilização das Rotas
 app.use("/eventos/palestrantes", palestrantesRoutes)
