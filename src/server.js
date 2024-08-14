@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Importação das rotas
 import palestrantesRoutes from "./routes/palestrantesRoutes.js"
+import eventosRoutes from "./routes/eventosRoutes.js"
 
 // Porta da aplicação
 const PORT = process.env.PORT;
@@ -25,6 +26,7 @@ import "./models/eventosModel.js"
 
 // Utilização das Rotas
 app.use("/eventos/palestrantes", palestrantesRoutes)
+app.use("/eventos", eventosRoutes)
 
 
 // Rota não encontrada

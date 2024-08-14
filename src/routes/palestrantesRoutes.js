@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-    deletePalestrante,
+  deletePalestrante,
   getAllPalestrantes,
   getPalestrante,
   postPalestrante,

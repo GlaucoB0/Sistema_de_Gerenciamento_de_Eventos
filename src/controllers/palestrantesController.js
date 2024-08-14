@@ -13,7 +13,7 @@ export const getAllPalestrantes = (req, res) => {
     if (data.length == 0) {
       res.status(404).json({ message: "Nenhum palestrante cadastrado" });
     }
-
+    
     res.status(200).json(data);
   });
 };
@@ -54,15 +54,15 @@ export const postPalestrante = (req, res) => {
   const palestrante_id = uuidv4();
   const insertSql = /*sql*/ `
     INSERT INTO palestrantes
-    (??, ??, ??)
+    ( ??, ??)
     VALUES
-    (?, ?, ?)
+    ( ?, ?)
     `;
   const insertSqlData = [
-    "palestrante_id",
+
     "nome",
     "expertise",
-    palestrante_id,
+
     nome,
     expertise,
   ];
