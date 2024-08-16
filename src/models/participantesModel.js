@@ -1,18 +1,21 @@
-import conn from '../config/conn.js'
+import conn from "../config/conn.js";
 
-const tableParticipante = /*sql*/`
+const tableParticipante = /*sql*/ `
     CREATE TABLE IF NOT EXISTS participantes(
-        participante_id varchar(60) primary key,
+        participante_Id int auto_increment primary key,
+        nome varchar(250) not null,
+        email varchar(250) not null,
+
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )
-`
+`;
 
-conn.query(tableParticipante, (err)=> {
-    if(err){
-        console.error(err)
-        return
-    }
+conn.query(tableParticipante, (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
 
-    console.log(`[participantes] table created`)
-})
+  console.log(`[participantes] table created`);
+});

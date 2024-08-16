@@ -51,7 +51,7 @@ export const postPalestrante = (req, res) => {
     }
   });
 
-  const palestrante_id = uuidv4();
+  const palestrante_Id = uuidv4();
   const insertSql = /*sql*/ `
     INSERT INTO palestrantes
     ( ??, ??)
@@ -78,13 +78,13 @@ export const postPalestrante = (req, res) => {
 };
 
 export const getPalestrante = (req, res) => {
-  const { palestrante_id } = req.params;
+  const { palestrante_Id } = req.params;
 
   const checkSql = /*sql*/ `
         SELECT * FROM palestrantes
         WHERE ?? = ?
     `;
-  const checkData = ["palestrante_id", palestrante_id];
+  const checkData = ["palestrante_Id", palestrante_Id];
 
   conn.query(checkSql, checkData, (err, data) => {
     if (err) {
@@ -102,7 +102,7 @@ export const getPalestrante = (req, res) => {
 };
 
 export const putPalestrante = (req, res) => {
-  const { palestrante_id } = req.params;
+  const { palestrante_Id } = req.params;
   const { nome, expertise } = req.body;
 
   if (!nome) {
@@ -118,7 +118,7 @@ export const putPalestrante = (req, res) => {
     SELECT * FROM palestrantes 
     WHERE ?? = ?
     `;
-  const checkData = ["palestrante_id", palestrante_id];
+  const checkData = ["palestrante_Id", palestrante_Id];
 
   conn.query(checkSql, checkData, (err, data) => {
     if (err) {
@@ -139,8 +139,8 @@ export const putPalestrante = (req, res) => {
       nome,
       "expertise",
       expertise,
-      "palestrante_id",
-      palestrante_id
+      "palestrante_Id",
+      palestrante_Id
     ];
 
     conn.query(updateSql, updateData, (err) => {
@@ -155,11 +155,11 @@ export const putPalestrante = (req, res) => {
 };
 
 export const deletePalestrante = (req, res) => {
-  const { palestrante_id } = req.params;
+  const { palestrante_Id } = req.params;
 
   const deleteSql = /*sql*/ `
     DELETE FROM palestrantes WHERE ?? = ?`;
-  const deleteData = ["palestrante_id", palestrante_id];
+  const deleteData = ["palestrante_Id", palestrante_Id];
 
   conn.query(deleteSql, deleteData, (err, info) => {
     if (err) {
@@ -174,3 +174,18 @@ export const deletePalestrante = (req, res) => {
     res.status(200).json({ message: "palestrante deletado" });
   });
 };
+
+export const getPalestranteMaisAtivo = (request, response) => {
+  const sql = /*sql*/ `
+  SELECT count(palestrante_Id) AS "participações", palestrante_Id  FROM eventos GROUP BY palestrante_Id
+  `
+
+  conn.query(sql, (err, data)=>{
+      if(err){
+          response.status(500).json({message: "erro ao listar palestrantes"})
+          return console.log(err)
+      }
+
+      response.status(200).json(data)
+  })
+}
